@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="../../assets/jquery-2.1.4.js"></script>
+    <script src="../../assets/angular.js"></script>
+    <script src="../../assets/angular-ui-router.js"></script>
+    <script src="../../assets/angular-local-storage.min.js"></script>
+    <script src="../../assets/bootstrap.js"></script>
+    <script src="../../assets/ui-bootstrap-tpls-0.13.0.js"></script>
+    <script src="../../assets/selectize.js"></script>
+    <script src="../../assets/ui-grid-unstable.js"></script>
+    <script src="../../assets/ng-file-upload-shim.js"></script>
+    <script src="../../assets/ng-file-upload.js"></script>
+    <script src="../../assets/angular-locale_es-pe.js"></script>
+    <script src="../../assets/jquery.placeholder.min.js"></script>
+    <script src="../../assets/jquery.form.js"></script>
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/bootstrap-theme.css">
+    <link rel="stylesheet" href="../../css/selectize.default.css">
+    <link rel="styleSheet" href="../../css/ui-grid-unstable.css" />
+    <link rel="stylesheet" href="../../css/yanbal-style.css" />
+</head>
+<body ng-app="app" ondragstart="return false" draggable="false"
+        ondragenter="event.dataTransfer.dropEffect='none'; event.stopPropagation(); event.preventDefault();"  
+        ondragover="event.dataTransfer.dropEffect='none';event.stopPropagation(); event.preventDefault();"  
+        ondrop="event.dataTransfer.dropEffect='none';event.stopPropagation(); event.preventDefault();">
+    <div class="container-fluid">
+        <header ng-include="'../general/views/nav.html'"></header>
+        <div class="yanbal-reset" resize-height ui-view></div>
+        <footer ng-include="'../general/views/footer.html'"></footer>
+    </div>
+	<div class="loading" loading-directive>
+		<div class="loading-icon">
+		</div>
+	</div>
+</body>
+<script src="app.js"></script>
+<script src="../login/controllers/LoginController.js"></script>
+<script src="../login/services/LoginService.js"></script>
+<script src="../coleccion/controllers/ColeccionController.js"></script>
+<script src="../coleccion/services/ColeccionService.js"></script>
+<script src="../coleccion/controllers/ArchivoController.js"></script>
+<script src="../coleccion/controllers/MoverArchivoController.js"></script>
+<script src="../coleccion/services/ArchivoService.js"></script>
+<script src="../coleccion/controllers/ColeccionModalController.js"></script>
+<script src="../coleccion/controllers/MensajeEliminarArchivosController.js"></script>
+<script src="../umbral/controllers/UmbralController.js"></script>
+<script src="../umbral/controllers/UmbralModalController.js"></script>
+<script src="../umbral/services/UmbralService.js"></script>
+<script src="../general/controllers/MensajeController.js"></script>
+<script src="../general/controllers/ConfirmacionController.js"></script>
+<script src="../general/controllers/NavController.js"></script>
+<script src="../general/services/SesionService.js"></script>
+<script src="../general/directives/Directives.js"></script>
+<script src="../general/utils/constants.js"></script>
+<script src="../general/utils/values.js"></script>
+<script src="../general/utils/modalUtil.js"></script>
+</html>

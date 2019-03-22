@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{modalTitulo}}</h3>
+</div>
+<div class="modal-body">
+    <div class="row margin-top-20">
+        <div class="col-xs-6 padding-top-4">
+            Extensi&oacute;n
+        </div>
+        <div class="col-xs-18 container-border">
+            <input type="text" class="yanbal-input-umbral" value="{{ umbralEdicion.extension }}" disabled />
+        </div>
+    </div>
+    <div class="row margin-top-20">
+        <div class="col-xs-6 padding-top-4">
+            Descripci&oacute;n
+        </div>
+        <div class="col-xs-18">
+            <input type="text" class="yanbal-input-umbral" validar-alfanumerico ng-model="umbralEdicion.descripcion" maxlength=100 />
+        </div>
+    </div>
+    <div class="row margin-top-20">
+        <div class="col-xs-10 padding-top-4">
+            Umbral m&aacute;ximo en descarga
+        </div>
+        <div class="col-xs-12 padding-0">
+            <input type="text" class="yanbal-input-umbral border-0 text-right" validar-numero-entero ng-model="umbralEdicion.descarga" maxlength=3 />
+            <div class="fake-border border-bottom-1"></div>
+        </div>
+        <div class="col-xs-2 padding-left-10 padding-top-3">
+            MB
+        </div>
+    </div>
+    <div class="row margin-top-20">
+        <div class="col-xs-10 padding-top-4">
+            Umbral m&aacute;ximo en carga
+        </div>
+        <div class="col-xs-12 padding-0">
+            <input type="text" class="yanbal-input-umbral border-0 text-right" validar-numero-entero ng-model="umbralEdicion.carga" maxlength=3 />
+            <div class="fake-border border-bottom-1"></div>
+        </div>
+        <div class="col-xs-2 padding-left-10 padding-top-3">
+            MB
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="yanbal-button" ng-click="actualizarUmbral()">Guardar</button>
+    <button class="yanbal-button-cancel" ng-click="cancel()">Cancelar</button>
+</div>

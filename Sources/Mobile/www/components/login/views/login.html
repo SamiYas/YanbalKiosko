@@ -1,0 +1,42 @@
+<ion-view hide-nav-bar="true" name="login-view">
+    <ion-content class="padding">
+        <div class="yanbalLogo">
+            <img ng-src="../img/logo-180.png" alt="yanbal logo" />
+        </div>
+        <div class="list yanbalLogin" ng-enter="login()">
+            <div>
+                <label class="item item-input yanbalUser">
+                    <input type="text" translate translate-attr-placeholder="LOGINCODIGO" ng-model="data.username" reset-field validar-username />
+                    <div class="fake-border"></div>
+                    <img ng-src="../img/usuario-180.png" alt="wpImg" class="hiddenImg" />
+                </label>
+                <button ng-click="reset($event)" class="icon yanbal-icon-close reset-field-icon"></button>
+            </div>
+            <div>
+                <label class="item item-input yanbalPass">
+                    <input type="password" translate translate-attr-placeholder="LOGINCONTRASENHA" ng-model="data.password" reset-field validar-password />
+                    <div class="fake-border"></div>
+                    <img ng-src="../img/contrasena-180.png" alt="wpImg" class="hiddenImg" />
+                </label>
+                <button ng-click="reset($event)" class="icon yanbal-icon-close reset-field-icon"></button>
+            </div>
+            <div class="yanbalCountry">
+                <label class="yanbalCountry-label">
+                    <input type="text" translate translate-attr-placeholder="LOGINPAIS" ng-model="data.countryText" ng-change="getPaises()" ng-focus="getPaises()" reset-field dropdown-directive />
+                    <div class="fake-border"></div>
+                    <img ng-src="../img/pais-180.png" alt="wpImg" class="hiddenImg" />
+                </label>
+                <button ng-click="reset($event)" class="icon yanbal-icon-close reset-field-icon"></button>
+                <div class="yanbal-country-dropdown">
+                    <div class="list">
+                        <a ng-repeat="country in countries" class="item" ng-click="selectPais(country)">
+                            {{ country.NOMBRE }}
+                            <i class="yanbal-item-icon" ng-class="{'selected': paisSeleccionado(country)}"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button id="loginButton" class="button button-block yanbalButton yanbal-button-login" type="submit" ng-click="login()" translate>LOGININGRESAR</button>
+    </ion-content>
+</ion-view>

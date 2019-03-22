@@ -1,0 +1,17 @@
+<ion-view view-title="{{ configurationTitle }}">
+    <ion-content>
+        <ion-list class="yanbalConfig">
+            <ion-toggle class="yanbal-title-item" toggle-class="yanbal-toggle" ng-model="settings.mobileNetwork" ng-change="UpdateMobileData()">
+                <p class="yanbal-item-text yanbal-item-text-mobile" translate>CONFIGURACIONDESCARGAR</p>
+            </ion-toggle>
+            <ion-item class="item yanbal-title-item item-icon-right item-configuracion">
+                <p class="yanbal-item-text yanbal-item-text-sincro configuracion" translate>CONFIGURACIONFECHA</p>
+                <i class="icon icon-accessory"><p class="yanbal-fecha">{{ fechaSinc }}</p></i>
+            </ion-item>
+            <ion-item class="item yanbal-title-item item-icon-right" ng-click="cerrarSesion()">
+                <p class="yanbal-item-text yanbal-item-text-detail" translate>CONFIGURACIONCERRARSESION</p>
+                <i class="icon ion-power-custom icon-accessory"></i>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanbal.kiosko.dao.ArchivoDao">
+    <!-- <cache /> -->
+	<select id="listarArchivos" parameterType="map" resultType="com.yanbal.kiosko.entities.Archivo" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_ARCHIVO_SEL_POR_CORRELPAD_NOMBR_DESC(#{correlativoColeccion, mode=IN, jdbcType=BIGINT},
+															      #{nombre,javaType=String,jdbcType=LONGVARCHAR,mode=IN},
+															      #{descripcion,javaType=String,jdbcType=LONGVARCHAR,mode=IN},
+															      #{correlativoPais, mode=IN})}
+    </select> 
+	<select id="obtenerPorCorrelativo" parameterType="map" resultType="com.yanbal.kiosko.entities.Archivo" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_ARCHIVO_SEL_PK(#{correlativoArchivo, mode=IN, jdbcType=BIGINT})}
+    </select>
+    <select id="modificar" parameterType="com.yanbal.kiosko.entities.Archivo" resultType="java.lang.Long" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_ARCHIVO_UPD(#{correlativoArchivo,jdbcType=BIGINT,mode=IN},
+										  #{correlativoRol, mode=IN, jdbcType=BIGINT},
+										  #{nombre,javaType=String,jdbcType=LONGVARCHAR,mode=IN},
+										  #{descripcion,javaType=String,jdbcType=LONGVARCHAR,mode=IN},
+										  #{tamanho,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{extension,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{nroOrden,javaType=Integer,jdbcType=INTEGER,mode=IN},
+										  #{descargable,javaType=Integer,jdbcType=INTEGER,mode=IN},
+										  #{destacado,javaType=Integer,jdbcType=INTEGER,mode=IN},
+										  #{rutaImgprevia,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{rutaArchivo,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{fechaInicio,mode=IN},
+										  #{fechaCaducidad,mode=IN},
+										  #{roles,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{usuarioModifica,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </select>
+	<select id="moverArchivo" parameterType="map" resultType="java.lang.Long" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_ARCHIVO_UPD_POR_CORRELCOLECCION(#{correlativoArchivo,jdbcType=BIGINT,mode=IN},
+										  #{correlativoColeccion,jdbcType=BIGINT,mode=IN},
+										  #{usuarioModifica,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    <select id="insertar" parameterType="com.yanbal.kiosko.entities.Archivo" resultType="java.lang.Long" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_ARCHIVO_INS(#{correlativoColeccion,jdbcType=BIGINT,mode=IN},
+										  #{correlativoPais,jdbcType=BIGINT,mode=IN},
+										  #{correlativoRol,jdbcType=BIGINT,mode=IN},
+										  #{nombre,javaType=String,jdbcType=LONGVARCHAR,mode=IN},
+										  #{descripcion,javaType=String,jdbcType=LONGVARCHAR,mode=IN},
+										  #{tamanho,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{extension,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{nroOrden,javaType=Integer,jdbcType=INTEGER,mode=IN},
+										  #{descargable,javaType=Integer,jdbcType=INTEGER,mode=IN},
+										  #{destacado,javaType=Integer,jdbcType=INTEGER,mode=IN},
+										  #{rutaImgprevia,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{rutaArchivo,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{fechaInicio,mode=IN},
+										  #{fechaCaducidad,mode=IN},
+										  #{roles,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{usuarioRegistra,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    <delete id="eliminar" parameterType="map" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_ARCHIVO_DEL(#{correlativoArchivo, mode=IN, jdbcType=BIGINT},
+										 #{usuarioModifica,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </delete>
+    <delete id="eliminarArchivos" parameterType="map" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_ARCHIVO_DEL_MULTIPLE(#{correlativosArchivo,javaType=String,jdbcType=VARCHAR,mode=IN},
+										 #{usuarioModifica,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </delete>    
+	<update id="actualizarArchivoNotificado" parameterType="map" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_ARCHIVO_NOTIFICADO_UPD(#{correlativoPais,jdbcType=BIGINT,mode=IN})}
+    </update>     
+    <select id="listarArchivosRol" parameterType="map" resultType="com.yanbal.kiosko.entities.Archivo" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_ARCHIVOS_ROL_LISTA(#{correlativosArchivo, mode=IN, jdbcType=VARCHAR})}
+    </select>
+    <select id="validarArchivoRol" parameterType="map" resultType="java.lang.Long" statementType="CALLABLE">
+        {CALL KSK_KIOSKO.USP_VALIDAR_ARCHIVO_ROL(#{correlativoArchivo,jdbcType=BIGINT,mode=IN},
+                                          #{rol,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </select>
+</mapper>

@@ -1,0 +1,21 @@
+<ion-view view-title="{{parentTitle}}">
+    <ion-content>
+		<ion-refresher pulling-icon="ion-refresher-yanbal" on-refresh="doRefresh()" spinner="none">
+		</ion-refresher>
+        <loading-directive></loading-directive>
+        <ion-list>
+            <ion-item ng-if="item.COLECCION && item.HIJOS > 0 || (!item.COLECCION && item.PUBLICADO)" class="item item-yambal"
+                      ng-repeat="item in coleccionItems"
+                      ng-click="item.COLECCION ? openColeccion(item.CORRELATIVO_COLECCION, item.NOMBRE) : openModal(item)"
+                      ng-class="{'yanbal-position-nuevo': item.NUEVO, 'item-active': isItemActive(item), 'item-descargando': item.DESCARGANDO == 1}" custom-width-directive>
+                <i class="yanbal-item-icon yanbal-item-icon-detail" ng-class="item.COLECCION ? 'folder' : item.DESTACADO ? item.EXTENSION + '-active' : item.EXTENSION"></i>
+                <p class="yanbal-item-text yanbal-item-text-detail" ng-class="{'yanbal-text-destacado': item.DESTACADO && !item.COLECCION, 'allow-long-text': item.COLECCION}">{{item.NOMBRE}}</p>
+                <i class="icon" ng-class="{'icon-yanbal-star yanbal-star-detail': item.DESTACADO, 'hide': item.COLECCION}"></i>
+                <i class="icon" ng-class="{'yanbal-nuevo icon-yanbal-nuevo yanbal-text-detail': item.NUEVO, 'hide': item.COLECCION || !item.NUEVO}" translate>COLECCIONNUEVO</i>
+                <i class="icon" ng-class="{'icon-yanbal-menu-active yanbal-menu-detail': item.NUEVO, 'icon-yanbal-menu yanbal-menu-detail': !item.NUEVO, 'hide': item.COLECCION }"></i>
+                <i class="icon yanbal-coleccion-right" ng-class="{'hide': !item.COLECCION}"></i>
+                <i ng-if="item.DESCARGANDO == 1" class="yanbal-item-icon descargando"></i>
+            </ion-item>            
+        </ion-list>        
+    </ion-content>	
+</ion-view>

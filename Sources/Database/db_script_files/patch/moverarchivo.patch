@@ -1,0 +1,468 @@
+### Eclipse Workspace Patch 1.0
+#P yanbalkioskoWeb
+Index: src/main/webapp/components/coleccion/controllers/ColeccionController.js
+===================================================================
+--- src/main/webapp/components/coleccion/controllers/ColeccionController.js	(revision 1309)
++++ src/main/webapp/components/coleccion/controllers/ColeccionController.js	(working copy)
+@@ -39,7 +39,7 @@
+ 		
+         $scope.obtenerPorNotificar();
+  
+-        $scope.cargarBreadcrumb = function(id_coleccion){
++        $scope.cargarBreadcrumb = function(id_coleccion) {
+         	var jsonRequest = {token:"", id: id_coleccion};
+         	jsonRequest.token = SesionService.token();
+ 	              
+@@ -82,6 +82,7 @@
+             ColeccionService.listarColecciones(jsonRequest)
+             	.success(function(data){ 
+             		$scope.coleccion = data.lista;
++            		console.log(data.lista);
+             	});
+         };
+ 
+@@ -123,7 +124,8 @@
+               { field: 'Caducidad', headerCellClass: 'text-center', enableColumnMenu: false, width: 110 },
+               { field: 'Estado', enableColumnMenu: false },
+               { field: 'Orden', enableColumnMenu: false, width: 60 },
+-              { field: 'Roles', enableColumnMenu: false }
++              { field: 'Roles', enableColumnMenu: false },
++              { field: 'Coleccion', visible: false }
+             ],
+             enableRowSelection: true,
+             enableSelectAll: false,
+@@ -229,7 +231,7 @@
+         });
+     };
+ 
+-    $scope.moveArchivo = function (size) {
++    $scope.moveArchivo = function (size) {
+         var modalInstance = $modal.open({
+             animation: $scope.animationsEnabled,
+             templateUrl: '../coleccion/views/mover-archivo-modal.html',
+@@ -317,7 +319,8 @@
+     					Caducidad:archivos[i].fec_caducidad,
+     					Estado: archivos[i].estado,
+     					Orden:archivos[i].nro_orden,
+-    					Roles:archivos[i].roles
++    					Roles:archivos[i].roles,
++    					Coleccion:archivos[i].id_coleccion
+     				});
+ 				}
+     		});
+@@ -346,7 +349,6 @@
+     };
+     
+     $scope.openColeccion = function (item) {
+-
+     	if(item.nivel<3){
+ 	    	var idColeccion = null;
+ 	    	if(item.id==null){
+@@ -354,7 +356,6 @@
+ 	    	}else{
+ 	    		idColeccion = item.id;
+ 	    	}
+-	    	
+ 	    	$scope.cargarBreadcrumb(idColeccion);
+ 	        $scope.cargarColeccion(idColeccion);
+     	}
+@@ -366,10 +367,14 @@
+         $scope.gridApi = gridApi;
+         gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+             var msg = 'row selected ' + row.isSelected;
++            console.log('change');
++            console.log(msg);
+         });
+ 
+         gridApi.selection.on.rowSelectionChangedBatch($scope, function (rows) {
+             var msg = 'rows changed ' + rows.length;
++            console.log('change batch');
++            console.log(msg);
+         });
+     };
+ 
+Index: src/main/webapp/components/coleccion/views/mover-archivo-modal.html
+===================================================================
+--- src/main/webapp/components/coleccion/views/mover-archivo-modal.html	(revision 1260)
++++ src/main/webapp/components/coleccion/views/mover-archivo-modal.html	(working copy)
+@@ -12,7 +12,7 @@
+             Origen
+         </div>
+         <div class="col-xs-19 yanbal-breadcrumb origen">
+-            <a ng-repeat="item in breadcrumbOrigen">{{item.text}}<i ng-class="{'separator': !$last}"></i></a>
++            <a ng-repeat="item in breadcrumbOrigen">{{item.nombre}}<i ng-class="{'separator': !$last}"></i></a>
+         </div>
+     </div>
+     <div class="row margin-top-20">
+@@ -20,18 +20,18 @@
+             Destino
+         </div>
+         <div class="col-xs-19 yanbal-breadcrumb">
+-            <a ng-click="openColeccion(item)" ng-class="{'active': item.active}" ng-repeat="item in breadcrumbDestino">{{item.text}}<i ng-class="{'separator': !$last}"></i></a>
++            <a ng-click="openColeccion(item)" ng-class="{'active': item.active}" ng-repeat="item in breadcrumbDestino">{{item.nombre}}<i ng-class="{'separator': !$last}"></i></a>
+         </div>
+     </div>
+     <div class="row margin-top-20">
+         <div class="col-xs-24">
+             <ul class="list-group">
+-                <li class="list-group-item" ng-dblclick="openColeccion(contenido)" ng-click="toggleColeccion(contenido)" ng-class="{'active': isColeccionShown(contenido)}" ng-repeat="contenido in coleccion">{{($index + 1) + '- ' + contenido.text}}</li>
++                <li class="list-group-item" ng-dblclick="openColeccion(contenido)" ng-click="toggleColeccion(contenido)" ng-class="{'active': isColeccionShown(contenido)}" ng-repeat="contenido in coleccion">{{contenido.orden + '- ' + contenido.nombre}}</li>
+             </ul>
+         </div>
+     </div>
+ </div>
+ <div class="modal-footer">
+-    <button class="yanbal-button" ng-click="ok()">Mover</button>
++    <button class="yanbal-button" ng-click="moverOk()">Mover</button>
+     <button class="yanbal-button-cancel" ng-click="cancel()">Cancelar</button>
+ </div>
+\ No newline at end of file
+Index: src/main/webapp/components/init/index.html
+===================================================================
+--- src/main/webapp/components/init/index.html	(revision 1309)
++++ src/main/webapp/components/init/index.html	(working copy)
+@@ -30,6 +30,7 @@
+ <script src="../coleccion/controllers/ColeccionController.js"></script>
+ <script src="../coleccion/services/ColeccionService.js"></script>
+ <script src="../coleccion/controllers/ArchivoController.js"></script>
++<script src="../coleccion/services/ArchivoService.js"></script>
+ <script src="../coleccion/controllers/ColeccionController.js"></script>
+ <script src="../coleccion/controllers/ColeccionModalController.js"></script>
+ <script src="../coleccion/controllers/ArchivoController.js"></script>
+Index: src/main/webapp/components/coleccion/views/administrar-colecciones.html
+===================================================================
+--- src/main/webapp/components/coleccion/views/administrar-colecciones.html	(revision 1283)
++++ src/main/webapp/components/coleccion/views/administrar-colecciones.html	(working copy)
+@@ -15,8 +15,8 @@
+ 					<div class="row margin-top-20">
+ 						<div class="col-xs-24">
+ 							<a class="yanbal-option edit pull-right margin-right-0"></a>
+-                            <a class="yanbal-option search pull-right" ng-click="confirmacionSensual(400)"></a>
+-							<a class="yanbal-option delete pull-right" ng-click="confirmacionEliminarColeccion(400)"></a>
++                            <a class="yanbal-option search pull-right"></a>
++							<a class="yanbal-option delete pull-right"></a>
+                             <a href="#" ng-click="crearColeccion()" class="yanbal-option add pull-right"></a>
+ 						</div>
+ 					</div>
+@@ -70,7 +70,7 @@
+ 				<div class="col-xs-24">
+ 					<a class="yanbal-checkbox pull-left" ng-click="seleccionarTodos()" ng-class="{'active': checkboxModel.seleccionarTodos}">Seleccionar todos</a>
+ 					<a class="yanbal-option delete pull-right margin-right-0"></a>
+-					<a href="#" ng-click="moveArchivo()" class="yanbal-option move pull-right"></a>
++					<a href="#" ng-click="moveArchivo(400)" class="yanbal-option move pull-right"></a>
+ 					<a class="yanbal-option search pull-right"></a>
+ 					<a class="yanbal-option edit pull-right"></a>
+ 					<a href="#" ng-click="openArchivo()" class="yanbal-option add pull-right"></a>
+Index: src/main/webapp/components/coleccion/services/ColeccionService.js
+===================================================================
+--- src/main/webapp/components/coleccion/services/ColeccionService.js	(revision 1309)
++++ src/main/webapp/components/coleccion/services/ColeccionService.js	(working copy)
+@@ -66,7 +66,7 @@
+ 		listarColecciones: function(objJson){
+ 			tramaListarColecciones.Body.Request.token = objJson.token;
+ 			tramaListarColecciones.Body.Request.id_coleccion_padre = objJson.id_coleccion_padre;
+-
++			console.log(tramaListarColecciones.Body.Request);
+ 			var deferred = $q.defer();
+             var promise = deferred.promise;
+             
+@@ -80,6 +80,8 @@
+                 },
+                 data: JSON.stringify(tramaListarColecciones)
+             }).success(function(data) {
++            	console.log('respuesta');
++            	console.log(data.Body.Response);
+ 	 			deferred.resolve(data.Body.Response); 			
+ 	 		});
+ 			
+Index: src/main/webapp/components/coleccion/controllers/ArchivoController.js
+===================================================================
+--- src/main/webapp/components/coleccion/controllers/ArchivoController.js	(revision 1309)
++++ src/main/webapp/components/coleccion/controllers/ArchivoController.js	(working copy)
+@@ -1,7 +1,8 @@
+ angular.module('app.controllers')
+ 
+-.controller('archivoController', ['$scope', '$modalInstance', 'localStorageService', 'ColeccionService', 'coleccionPadre', 'items', 'Upload', 'sesionConstants', function ($scope, $modalInstance, localStorageService, ColeccionService, coleccionPadre, items, Upload, sesionConstants) {
+-    $scope.breadcrumbOrigen = [];
++.controller('archivoController', ['$scope', '$modalInstance', 'localStorageService', 'ColeccionService', 'items', 'Upload', 'sesionConstants',  'SesionService', 'ArchivoService', function ($scope, $modalInstance, localStorageService, ColeccionService, items, Upload, sesionConstants, SesionService, ArchivoService) {
++	$scope.jsonRaiz = { nombre: 'Raiz', id: null, nivel: -1, active: false };
++	$scope.breadcrumbOrigen = [];
+     $scope.breadcrumbDestino = [];
+     $scope.formats = [];
+     $scope.events = [];
+@@ -8,10 +9,10 @@
+     $scope.coleccion = [];
+     $scope.nroOrden = [];    
+     var colores = [];
+-	$scope.nuevaColeccion = {id_coleccion : "", id_coleccion_padre: "", nombre: "", nivel: "", orden: "", color: "", descripcion: ""};
+-	$scope.nuevaColeccion.id_coleccion_padre = coleccionPadre.id_coleccion;
+-	$scope.nuevaColeccion.nivel = coleccionPadre.nivel;
+-	$scope.nuevaColeccion.id_coleccion = "13";
++//	$scope.nuevaColeccion = {id_coleccion : "", id_coleccion_padre: "", nombre: "", nivel: "", orden: "", color: "", descripcion: ""};
++//	$scope.nuevaColeccion.id_coleccion_padre = coleccionPadre.id_coleccion;
++//	$scope.nuevaColeccion.nivel = coleccionPadre.nivel;
++//	$scope.nuevaColeccion.id_coleccion = "13";
+ 
+     $scope.init = function () {
+         $scope.items = items;
+@@ -30,7 +31,6 @@
+         $scope.events = [
+             {
+                 date: tomorrow,
+-                status: 'full'
+             },
+             {
+                 date: afterTomorrow,
+@@ -38,12 +38,8 @@
+             }
+         ];
+         
+-        $scope.breadcrumbOrigen.push({ text: 'Raiz', value: 'bread' });
+-        $scope.breadcrumbOrigen.push({ text: 'coleccion - 1', value: 'coleccion' });        
+-        $scope.breadcrumbDestino[0] = {
+-            text: 'Raiz',
+-            value: 'bread'
+-        };
++        $scope.cargarBreadcrumbOrigen(8);
++        
+         $scope.toggleColeccion($scope.coleccion[3]);
+         /*TODO: Reacondicionar con la llamada a servicio*/        
+         for (var i = 0; i < 5; i++) {
+@@ -64,6 +60,45 @@
+         };
+     };
+ 
++    $scope.cargarBreadcrumb = function(id_coleccion, tipo) {
++    	var jsonRequest = {token:"", id: id_coleccion};
++    	jsonRequest.token = SesionService.token();
++              
++    	ColeccionService.obtenerRutaOrigen(jsonRequest)
++    		.success(function(datos){
++        		 var bcResult = datos.data;
++                 /* breadcrumb */
++        		 switch (tipo) {
++				 case 1:
++					 $scope.breadcrumbOrigen = [];
++	        		 $scope.breadcrumbOrigen[0] = $scope.jsonRaiz;
++	                 for (var i = 0; i < bcResult.length; i++) {
++	                	 $scope.breadcrumbOrigen.push({ nombre: bcResult[i].nombre, id: bcResult[i].id, nivel: bcResult[i].nivel, active: false
++	    	            }); 						
++	                 }
++					 break;
++				 case 2:
++					 $scope.breadcrumbDestino = [];
++	        		 $scope.breadcrumbDestino[0] = $scope.jsonRaiz;
++	                 for (var i = 0; i < bcResult.length; i++) {
++	                	 $scope.breadcrumbDestino.push({ nombre: bcResult[i].nombre, id: bcResult[i].id, nivel: bcResult[i].nivel, active: false
++	    	            }); 						
++	                 }
++					 break;
++				 default:
++					 break;
++				 }
++              });
++    };
++
++    $scope.cargarBreadcrumbOrigen = function (id_coleccion) {
++    	$scope.cargarBreadcrumb(id_coleccion, 1);
++    };
++
++    $scope.cargarBreadcrumbDestino = function (id_coleccion) {
++    	$scope.cargarBreadcrumb(id_coleccion, 2);
++    };
++
+     $scope.check = function (item) {
+         item.value = !item.value;
+     };
+@@ -102,7 +137,25 @@
+     $scope.cancel = function () {
+         $modalInstance.dismiss('cancel');
+     };
+-
++
++    $scope.moverOk = function () {
++    	var jsonRequest = {id_archivo: 5, id_coleccion:$scope.obtenerColeccionDestino()};
++    	ArchivoService.moverArchivo(jsonRequest).
++    		succes(function(datos){
++    			if(datos.resultado == 'HttpStatus.OK'){
++    				console.log('id_archivo movido');
++    			}
++    		});
++    };
++
++    $scope.obtenerColeccionDestino = function () {
++    	var tamanho = $scope.breadcrumbDestino.length;
++    	if (tamanho > 1) {
++    		return $scope.breadcrumbDestino[tamanho - 1].id;
++    	}
++    	return null;
++    }
++    
+     /*datepickers*/
+ 
+     $scope.today = function () {
+@@ -157,46 +210,32 @@
+     };
+ 
+     $scope.openColeccion = function (item) {
+-        /*TODO: reemplazar con contenido de obtener padres*/
+-        if (item.value === 'bread') {
+-            $scope.breadcrumbDestino = [];
+-            $scope.breadcrumbDestino[0] = {
+-                text: 'Raiz',
+-                value: 'bread'
+-            };
+-            if (item.text === 'Raiz') {
+-                item.id = 0;
+-            }
+-        }
+-
+-        if (item.text !== 'Raiz') {
+-            $scope.breadcrumbDestino.push({
+-                text: item.text,
+-                value: 'bread'
+-            });
+-        }
+-
+-        /*TODO: reacondicionar con la llamada a servicio*/
+-        if (item.id === 0) {
+-            $scope.coleccion = [];
+-            for (var i = 0; i < 5; i++) {
+-                $scope.coleccion[i] = {
+-                    text: 'Coleccion - ' + i,
+-                    value: 'something',
+-                    id: i
+-                };
+-            }
+-        }
+-        else {
+-            $scope.coleccion = [];
+-            for (var i = 0; i < 3; i++) {
+-                $scope.coleccion[i] = {
+-                    text: 'Contenido - ' + i,
+-                    value: 'something'
+-                };
+-            }
+-        }
++    	if(item.nivel<3){
++	    	var idColeccion = null;
++	    	if(item.id==null){
++	    		idColeccion = item.id_coleccion;
++	    	}else{
++	    		idColeccion = item.id;
++	    	}
++	    	$scope.cargarBreadcrumbDestino(idColeccion);
++	        $scope.cargarColeccion(idColeccion);
++    	}
+     };
++
++    $scope.cargarColeccion = function(id_col_padre){
++        var jsonRequest = {token:"", id_coleccion_padre: id_col_padre};
++        jsonRequest.token = SesionService.token();
+         
++        ColeccionService.listarColecciones(jsonRequest)
++        	.success(function(data){ 
++        		$scope.coleccion = data.lista;
++        		console.log(data.lista);
++        	});
++    };
++
++
++    $scope.cargarBreadcrumbDestino(null);
++    $scope.cargarColeccion(null);
++    
+     $scope.init();
+ }]);
+\ No newline at end of file
+Index: src/main/webapp/components/general/utils/values.js
+===================================================================
+--- src/main/webapp/components/general/utils/values.js	(revision 1309)
++++ src/main/webapp/components/general/utils/values.js	(working copy)
+@@ -218,4 +218,17 @@
+         }
+     }
+ })
++.value('tramaMoverArchivo', {
++	Header: {
++        ApplicationId: "KIOSKO2WEB",
++        ServiceName: "moverArchivo"
++    },
++    Body: {
++        Request: {
++        	token : "",
++        	id_archivo : "",
++        	id_coleccion : "",
++        }
++    }
++})
+ ;
+Index: src/main/webapp/components/general/utils/constants.js
+===================================================================
+--- src/main/webapp/components/general/utils/constants.js	(revision 1309)
++++ src/main/webapp/components/general/utils/constants.js	(working copy)
+@@ -19,7 +19,8 @@
+     //"urlYambalValidarSesion": "http://proxynp.unique-yanbal.com/integraciondesa/WSIntegracionYanbalStoreWeb/rest/WSMantenimientoUsuarios/validaUsuarioMbl",
+     "urlYanbalValidarSesion" : "http://192.168.6.170:9080/YanbalKioskoServices/web/obtenerDatosUsuario",
+     "urlObtenerPorNotificar" : "/web/obtenerPorNotificar",
+-    "urlCerrarSesion": "/web/cerrarsesion"
++    "urlCerrarSesion": "/web/cerrarsesion",
++    "urlMoverArchivo": "/web/moverArchivo"
+ })
+ 
+ .constant('responseConstants', {
+Index: src/main/webapp/components/coleccion/services/ArchivoService.js
+===================================================================
+--- src/main/webapp/components/coleccion/services/ArchivoService.js	(revision 0)
++++ src/main/webapp/components/coleccion/services/ArchivoService.js	(working copy)
+@@ -0,0 +1,37 @@
++angular.module('app.services')
++
++.service('ArchivoService', ['$http', '$q', 'serviceUrlConstants', 'tramaMoverArchivo', function($http, $q, serviceUrlConstants, tramaMoverArchivo) {
++	
++    return {		
++    	moverArchivo: function(objJson){
++    		tramaMoverArchivo.Body.Request.id_archivo = objJson.id_archivo;
++    		tramaMoverArchivo.Body.Request.id_coleccion = objJson.id_coleccion;
++			
++			var deferred = $q.defer();
++            var promise = deferred.promise;
++            
++            $http({
++                url: serviceUrlConstants.urlServidor+serviceUrlConstants.urlMoverArchivo,
++                method: 'POST',
++                headers: {
++                    'Access-Control-Allow-Origin': '*',
++                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
++                    'Content-Type': 'application/json'
++                },
++                data: JSON.stringify(tramaMoverArchivo)
++            }).success(function(data) {
++	 			deferred.resolve(data.Body.Response); 			
++	 		});
++			
++			promise.success = function(fn) {
++                promise.then(fn);
++                return promise;
++            };
++            promise.error = function(fn) {
++                promise.then(null, fn);
++                return promise;
++            };
++            return promise;
++		}
++    };
++}]);
+Index: src/main/webapp/components/general/services/SesionService.js
+===================================================================
+--- src/main/webapp/components/general/services/SesionService.js	(revision 1309)
++++ src/main/webapp/components/general/services/SesionService.js	(working copy)
+@@ -10,7 +10,8 @@
+     		return localStorageService.get(sesionConstants.SESION_PAIS);
+     	},
+     	paisCodigo: function (){
+-    		return localStorageService.get(sesionConstants.SESION_PAIS).codigo;
++//    		return localStorageService.get(sesionConstants.SESION_PAIS).codigo;
++    		return 1;
+     	} ,
+     	clearAll: function () {
+     		return localStorageService.clearAll();

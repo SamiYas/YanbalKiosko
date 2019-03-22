@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanbal.kiosko.dao.DispositivoActivoDao">
+    <!-- <cache /> -->  
+    <insert id="registrarSesion" parameterType="com.yanbal.kiosko.entities.DispositivoActivo" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_INS_OR_UPD_DISPOSITIVO_POR_DISP_ID(#{codigoPais,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  						#{nombreUsuario,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  						#{clave,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  						#{notificacionIdentificador,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  						#{dispositivoSis,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  						#{dispositivoIdentificador,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  						#{token,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  						#{fechaUltimaSinc})}
+    </insert>
+    <delete id="eliminarPorToken" parameterType="map" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_DISPOSITIVO_ACTIVO_DEL(#{token,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </delete>
+	<select id="obtenerPorToken" parameterType="map" resultType="com.yanbal.kiosko.entities.DispositivoActivo" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_DISPOSITIVO_ACTIVO_SEL_POR_TOKEN(#{token,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </select>
+	<select id="obtenerDispositivos" parameterType="map" resultType="com.yanbal.kiosko.entities.DispositivoActivo" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_DISPOSITIVO_ACTIVO_SEL_POR_PAIS(#{correlativoPais,javaType=Long,jdbcType=BIGINT,mode=IN},
+															 #{diasInactividad,javaType=Integer,jdbcType=INTEGER,mode=IN})}
+    </select>    
+</mapper>

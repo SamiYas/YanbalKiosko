@@ -1,0 +1,1006 @@
+/*font*/
+@font-face {
+    font-family: 'TradeGothicLTStd-Light';
+    src: url('../fonts/TradeGothicLTStd-Light.eot?#iefix') format('embedded-opentype'), url('../fonts/TradeGothicLTStd-Light.otf') format('opentype'), url('../fonts/TradeGothicLTStd-Light.woff') format('woff'), url('../fonts/TradeGothicLTStd-Light.ttf') format('truetype'), url('../fonts/TradeGothicLTStd-Light.svg#TradeGothicLTStd-Light') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+    font-family: TradeGothicLTStd-Light;
+}
+
+/* Custom icons*/
+
+.ion-back-custom {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/indicador-blanco-180.png);
+    background-size: auto 100%;
+    margin-top: 8px !important;
+    width: 17px;
+    height: 17px;
+    display: block;
+}
+
+.ion-back-custom:before {
+    content: " ";
+}
+
+.ion-power-custom {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/cerrar-180.png);
+    background-size: 25px 25px;
+    padding-right: 15px;
+}
+
+.ion-power-custom:before {
+    content: " ";
+}
+
+.ion-ios-config-active {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/configuracion-naranja-180.png);
+    background-size: 20px 20px;
+    margin-top: 8px !important;
+}
+
+.ion-ios-config {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/configuracion-gris-180.png);
+    background-size: 20px 20px;
+    margin-top: 9px !important;
+}
+
+.ion-ios-coleccion-active {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/colecciones-naranja-180.png);
+    background-size: 20px 20px;
+    margin-top: 8px !important;
+    border-right: 2px solid #c6c6c6;
+}
+
+.ion-ios-coleccion {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/colecciones-gris-180.png);
+    background-size: 20px 20px;
+    margin-top: 9px !important;
+    border-right: 2px solid #c6c6c6;
+}
+
+.ion-ios-notif-active {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/notificaciones-naranja-180.png);
+    background-size: 20px 20px;
+    margin-top: 8px !important;
+    border-right: 2px solid #c6c6c6;
+}
+
+.ion-ios-notif-active.active {
+    background-image: url(../img/notificaciones-naranja-180-bolita-roja.png);
+}
+
+.ion-ios-notif {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/notificaciones-gris-180.png);
+    background-size: 20px 20px;
+    margin-top: 9px !important;
+    border-right: 2px solid #c6c6c6;
+}
+
+.ion-ios-notif.active {
+    background-image: url(../img/notificaciones-gris-180-con-bolita-roja.png);
+}
+
+.ion-coleccion-principal {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/coleccion-gris-180.png);
+    background-size: auto 100%;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-top: -2px;
+}
+
+.ion-coleccion-principal-active {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/coleccion-gris-180.png);
+    background-size: auto 100%;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-top: -2px;
+}
+
+/* Pagina principal, items, iconos*/
+
+.title.title-center.header-item {
+    color: #ffffff;
+    top: 2px;
+}
+
+.bar-stable.bar.bar-header.disable-user-behavior {
+    background-color: #eb6d30;
+}
+
+.tabs{
+    width: 100%!important;
+}
+
+.tab-item{
+    max-width: 33.3%!important;
+}
+
+.tabs-striped .tabs {
+    background-color: #f7f7f7;
+}
+
+.tabs-top.tabs-striped a.tab-item.tab-item-active, .tabs-top.tabs-striped a.tab-item.active, .tabs-top.tabs-striped a.tab-item.activated {
+    border-color: #eb6d30;
+    border-width: 0 0 4px 0 !important;
+}
+
+.tabs-striped .tabs {
+    border-bottom-color: transparent;
+}
+
+.ion-refresher-yanbal {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/rerfresh-180.png);
+    background-size: auto 100%;
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+}
+
+.item {
+    border-color: #c6c6c6;
+}
+
+    .item a {
+        color: #666;
+        font-size: 14px;
+    }
+
+.item-accordion {
+    padding: 12px 110px 12px 75px;
+}
+
+.item.item-yambal.item-descargando{
+    padding-left: 60px;
+}
+
+.item.active.item-stable {
+    background-color: #f7f7f7;
+    border-left: 6px solid;
+}
+
+.item.item-stable {
+    background-color: #ffffff;
+    border-left: 6px solid;
+    border-bottom-color: #8d8d8d;
+    border-top-color: #8d8d8d;
+    height: 60px;
+}
+
+.list .item.item-accordion {
+    line-height: 30px;
+    height: 56px;
+    transition: 0.09s all linear;
+}
+
+.list .item.item-accordion.ng-hide {
+    line-height: 0px;
+}
+
+.yanbal-coleccion-right {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/indicador-gris-180.png);
+    background-size: auto 100%;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+
+.item-stable.item.active .yanbal-coleccion-right {
+    background-image: url(../img/indicador-abajo-gris-180.png);
+}
+
+.yanbal-item-icon {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 100%;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    margin-left: -30px;
+}
+
+.yanbal-item-icon.yanbal-item-icon-detail {
+    margin-top: -3px;
+}
+
+.descargando{
+    left: 40px;
+    top: 17px;
+    width: 15px;
+    height: 15px;
+    background-image: url(../img/descargar-180.png);
+}
+
+.item.item-accordion .yanbal-item-icon {
+    margin-top: 1px;
+}
+
+.yanbal-title-item {
+    height: 60px;
+}
+
+.yanbal-title-item .yanbal-item-text.yanbal-item-text-detail {
+    line-height: 28px;
+    display: inline-block;
+    margin-bottom: 0px;
+    width: 65%;
+}
+
+.yanbal-title-item .yanbal-item-text.yanbal-item-text-mobile {
+    line-height: 28px;
+    display: inline-block;
+    margin-bottom: 0px;
+}
+
+.yanbal-title-item .yanbal-item-text.yanbal-item-text-sincro {
+    line-height: 28px;
+    display: inline-block;
+    margin-bottom: 0px;
+}
+
+.yanbal-title-text {
+    width: 85%;
+    margin: 0 !important;
+    display: inline-block;
+    line-height: 28px;
+    padding-top: 2px;
+}
+
+.item-accordion .yanbal-item-text {
+    margin-bottom: 0;
+    padding-top: 3px;
+}
+
+.yanbal-item-text {
+    width: 85%;
+    margin: 0;
+}
+
+.item item-yambal yanbal-position-nuevo p{
+    width: 60%;
+}
+
+.yanbal-item-text.allow-long-text {
+    width: 135%;
+}
+
+.yanbal-item-text.yanbal-item-text-detail {
+    padding-top: 3px;
+    display: inline-block;
+}
+
+.yanbal-item-text.yanbal-item-text-detail.allow-long-text {
+    width: 95%;
+}
+
+.PDF {
+    background-image: url(../img/archivo-pdf-180.png);
+}
+
+.PDF-active {
+    background-image: url(../img/archivo-pdf-naranaja-180.png);
+}
+
+.JPG {
+    background-image: url(../img/imagen-gris-180.png);
+}
+
+.JPG-active {
+    background-image: url(../img/imagen-naranja-180.png);
+}
+
+.MP3 {
+    background-image: url(../img/audio-180grisok.png);
+}
+
+.MP3-active {
+    background-image: url(../img/audio-180ok.png);
+}
+
+.MP4 {
+    background-image: url(../img/video-gris-180ok.png);
+}
+
+.MP4-active {
+    background-image: url(../img/video-180ok.png);
+}
+
+.yanbal-text-destacado {
+    color: #eb6d30 !important;
+}
+
+.item-active {
+    background-color: #f7f7f7;
+}
+
+.folder {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/campanas-gris-180.png);
+    background-size: auto 100%;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+}
+
+.imgPreview {
+    max-width: 100%;
+    max-height: 100%;
+    padding: 7px 7px 0 7px;
+    display: block;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.yanbalContext {
+    position: absolute;
+    top: 20%;
+    left: 31%;
+    z-index: 10;
+    width: 60%;
+    border: 1px solid #6c6c6c;
+    min-height: 20%;
+    background-color: #f7f7f7;
+}
+
+.yanbalContext .item {
+    background-color: #f7f7f7;
+}
+
+.yanbalMenu {
+    position: relative;
+}
+
+.item.item-yambal {
+    padding: 16px 16px 16px 50px;
+    height: 56px;
+}
+
+.icon-yanbal-menu {
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 9px;
+    height: 22px;
+    margin-right: 5px;
+    background-size: auto 100%;
+    background-image: url(../img/puntos-gris-180.png);
+    position: absolute;
+    right: 10px;
+    top: 16px;
+}
+
+.icon-yanbal-menu-active {
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 9px;
+    height: 22px;
+    margin-right: 5px;
+    background-size: auto 100%;
+    background-image: url(../img/puntos-naranja-180.png);
+    position: absolute;
+    right: 10px;
+    top: 16px;
+}
+
+.icon-yanbal-menu.yanbal-menu-detail, .icon-yanbal-menu-active.yanbal-menu-detail {
+    top: 15px;
+}
+
+.icon-yanbal-menu.yanbal-menu-notificacion, .icon-yanbal-menu-active.yanbal-menu-notificacion {
+    top: 17px;
+}
+
+.icon-yanbal-star {
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 15px;
+    height: 15px;
+    margin: 7px 5px 0px 0px;
+    background-size: auto 100%;
+    background-image: url(../img/estrella-180.png);
+    position: absolute;
+    right: 22px;
+    top: 11px;
+    image-rendering: pixelated;
+}
+
+.icon-yanbal-star.yanbal-star-detail {
+    top: 10px;
+}
+
+.yanbal-position-nuevo .icon-yanbal-star {
+    right: 85px;
+}
+
+.yanbal-nuevo {
+    color: #eb6d30;
+    margin: 4px 8px 0px 9px;
+    font-size: 14px;
+}
+
+.icon-yanbal-nuevo {
+    position: absolute;
+    right: 22px;
+    top: 11px;
+}
+
+.icon-yanbal-nuevo.yanbal-text-detail {
+    top: 15px;
+}
+
+.yanbalIcon {
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 5px;
+    background-size: auto 100%;
+}
+
+.yanbalLogo {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    margin: 25% auto 10% auto;
+}
+
+.no-items{
+    border-bottom: none;
+    border-left: none!important;
+    text-align: center;
+}
+
+/*Login*/
+
+.yanbalLogin {
+    margin-bottom: 20%;
+}
+
+.yanbalLogin > div{
+    position: relative;
+}
+
+.yanbalLogin div > label {
+    border: 1px solid #c6c6c6;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    margin: 15px 10% 0px 10%;
+    padding: 0 0 3px 0;
+}
+
+.yanbalLogin div > label input:focus {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-user-modify: read-write-plaintext-only;
+}
+
+.yanbalCountry-label input:focus {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-user-modify: read-write-plaintext-only;
+}
+
+.fake-border {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 6px;
+    border-left: 1px solid #c6c6c6;
+    border-right: 1px solid #c6c6c6;
+}
+
+.hiddenImg {
+    display: none;
+    position: absolute;
+    left: 7px;
+    top: 12px;
+    width: 22px;
+    height: 22px;
+}
+
+.yanbalLogo img {
+    width: 23%;
+}
+
+.yanbal-icon-close {
+    width: 15px;
+    height: 15px;
+    background-image: url(../img/borrar-180.png);
+    background-size: 13px 13px;
+    background-repeat: no-repeat;
+}
+
+.item-input:before {
+    width: 35px;
+    height: 22px;
+    content: " ";
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 100%;
+    display: block;
+    margin-top: 12px;
+}
+
+.item-input.yanbalUser::before {
+    background-image: url(../img/usuario-180.png);
+}
+
+.item-input.yanbalPass::before {
+    background-image: url(../img/contrasena-180.png);
+}
+
+.yanbal-country-dropdown {
+    position: absolute;
+    right: 0;
+    width: 90%;
+    top: 37px;
+    display: none;
+}
+
+.yanbalCountry {
+    position: relative;
+    overflow: visible;
+    border: 1px solid #c6c6c6;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    margin: 15px 10% 0 10%;
+    padding: 0 0 3px 0;
+    height: 38px;
+}
+
+.yanbalCountry .selected {
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    background-image: url(../img/check-180.png);
+}
+
+.yanbalCountry::before {
+    width: 35px;
+    height: 22px;
+    content: " ";
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 100%;
+    display: block;
+    position: absolute;
+    margin-top: 12px;
+    background-image: url(../img/pais-180.png);
+}
+
+.yanbalCountry input{
+    padding-left: 35px;
+    padding-top: 15px;
+    margin-top: -20px;
+}
+
+.item-input.yanbalCountry > div.ui-select-container::after {
+    width: 15px;
+    height: 25px;
+    position: absolute;
+    content: " ";
+    top: 11px;
+    right: 5px;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 15px 15px;
+    background-image: url(../img/indicador-gris-180.png);
+}
+
+.item-input.yanbalCountry > div.ui-select-container.open::after {
+    background-image: url(../img/indicador-abajo-gris-180.png);
+}
+
+.item-input.yanbalUser > input, .item-input.yanbalPass > input {
+    padding-top: 16px;
+}
+
+.yanbalCountry .item-input-wrapper {
+    background: #fff;
+}
+
+.yanbalCountry .has-header {
+    top: 38px;
+    border: 1px solid #c6c6c6;
+}
+
+.yanbalCountry .ion-autocomplete {
+    padding-top: 15px;
+}
+
+.yanbalCountry .bar.item-input-inset .item-input-wrapper {
+    padding-left: 0;
+}
+
+.yanbalCountry .bar.item-input-inset .item-input-wrapper input {
+    padding-left: 2px;
+    padding-top: 12px;
+}
+
+.yanbalCountry .item {
+    padding: 0;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.button.yanbalButton {
+    color: #ffffff;
+    background-color: #eb6d30;
+    border-radius: 5px;
+    min-width: 115px;
+    margin: auto;
+}
+
+.button.yanbalButton.yanbal-button-login {
+    width: 63%;
+    height: 55px;
+}
+
+/*Popup archivo*/
+
+.yanbal-modal .item {
+    padding: 14px;
+}
+
+.yanbalRight {
+    position: absolute;
+    right: 0px;
+    margin-right: 15px;
+}
+
+.yanbalOpen {
+    background-image: url(../img/abrir-180.png);
+}
+
+.yanbalDownload {
+    background-image: url(../img/descargar-180.png);
+}
+
+.yanbalDelete {
+    background-image: url(../img/eliminar-gris-180.png);
+}
+
+.yanbal-item-disabled{
+    color: #c6c6c6;
+}
+
+/*Popup confirm y alert*/
+
+.popup-head {
+    background-color: #eb6d30;
+}
+
+.popup-head > h3 {
+    color: #fff;
+}
+
+.popup-buttons .button {
+    border-radius: 5px;
+}
+
+/*Configuracion*/
+
+.toggle-small.item-toggle .toggle {
+    top: 22px;
+}
+
+.yanbal-toggle input:checked + .track {
+    background-color: #eb6d30;
+}
+
+.yanbal-toggle div.track {
+    border: 0;
+    width: 40px;
+    height: 20px;
+    margin-top: -2px;
+    background: #8d8d8d;
+}
+
+.yanbal-toggle div.track div.handle {
+    top: 4px;
+    left: 8px;
+    width: 17px;
+    height: 17px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.yanbal-toggle.toggle input:checked + .track .handle {
+    webkit-transform: translate3d(18px, 0, 0);
+    transform: translate3d(18px, 0, 0);
+    background-color: #fff;
+}
+
+.yanbal-fecha {
+    font-size: 12px !important;
+    padding-right: 15px;
+    padding-top: 5px;
+}
+
+.item-configuracion{
+    padding-right: 35%;
+}
+
+.configuracion{
+    width: 98%;
+}
+
+/*Estilos genericos*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, i, u, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, fieldset, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    vertical-align: middle;
+}
+
+.yanbal-full-width {
+    width: 100%;
+}
+
+.hideBorderBottom {
+    border-bottom: none;
+}
+
+.bar .buttons span.back-text {
+    visibility: hidden;
+}
+
+.scroll-content > .scroll {
+    /*-webkit-transform: translate3d(0px, 0px, 0px) scale(1)!important;*/
+}
+
+.border-top-none {
+    border-top: none;
+}
+
+input.reset-field {
+    padding-right: 30px;
+}
+
+.reset-field-icon {
+    position: absolute;
+    right: 40px;
+    top: 18px;
+    margin: 0;
+    color: #bbb;
+    background-color: #fff;
+    border: none;
+    z-index: 99;
+    display: none;
+}
+
+.yanbalCountry .reset-field-icon{
+    right: 5px;
+}
+
+/*Refresher icono y efecto*/
+
+.scroll-refresher {
+    top: -60px;
+    z-index: 3;
+}
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.icon-refreshing {
+    height: 100%;
+}
+
+.icon-refreshing:before {
+    content: " ";
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/rerfresh-180.png);
+    background-size: auto 100%;
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 0.8s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+.scroll-refresher .ionic-refresher-content {
+    margin-bottom: -5px;
+}
+
+.loading-directive {
+    width: 100%;
+    font-size: 30px;
+    text-align: center;
+    padding: 20px 0 10px 0;
+    height: 60px;
+    display: block;
+}
+
+.loading-directive .ion-refresher-yanbal{
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 0.8s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+.closing .loading-directive {
+    height: 0;
+    padding: 0;
+}
+
+.img-placeholder{
+    width: 100%;
+    padding-bottom: 128%;
+    position: relative;
+}
+
+/*modificacion de estilos por plataforma*/
+/*windows phone*/
+
+.platform-windowsphone8 .yanbal-toggle div.track div.handle {
+    top: 8px;
+}
+
+.platform-windowsphone8 .item-toggle .toggle {
+    top: 18px;
+}
+
+.platform-windowsphone8 .hiddenImg {
+    display: block;
+}
+
+.platform-windowsphone8 .item-input.yanbalUser > input, .platform-windowsphone8 .item-input.yanbalPass > input {
+    text-indent: 0px;
+}
+
+.platform-windowsphone8 .yanbalCountry .selectize-input > div {
+    text-indent: 35px;
+}
+
+.platform-windowsphone8 .yanbalCountry .selectize-input input {
+    padding-left: 35px;
+}
+
+.platform-windowsphone8 .modal-backdrop, .platform-windowsphone8 .modal-backdrop-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.platform-windowsphone8 .reset-field-icon{
+    right: 50px;
+}
+
+.platform-windowsphone8 .yanbalCountry .reset-field-icon{
+    right: 5px;
+}
+
+/*ios*/
+
+.platform-ios .item-toggle .toggle {
+    top: 18px;
+}
+
+.platform-ios .yanbal-toggle div.track div.handle {
+    top: 5px;
+}
+
+.platform-ios .reset-field-icon{
+    right: 30px;
+}
+
+.platform-ios .yanbalCountry .reset-field-icon{
+    right: -6px;
+}
+
+/*android*/
+
+/* Modificacion de estilos por pantalla de dispositivo y plataforma */
+
+/* Portrait Ipad */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    .platform-ios .reset-field-icon {
+        right: 70px;
+    }
+    
+    .platform-ios .yanbalCountry .reset-field-icon {
+        right: -5px;
+    }
+}
+
+/* Portrait tabs */
+@media (max-device-width: 800px) and (max-device-width: 799px) and (orientation: portrait) {
+    .button {
+        min-width: 115px;
+    }
+}
+
+/* Lenovo a1 */
+@media (device-width: 600px) and (device-height: 1024px) and (orientation: portrait) {
+    .yanbalCountry{
+        margin-top: 35px;
+    }
+}
+
+/* Portrait iphone 5/5s */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 568px)
+and (orientation : portrait) {
+    .platform-ios .reset-field-icon {
+        right: 20px;
+    }
+    
+    .platform-ios .yanbalCountry .reset-field-icon {
+        right: -10px;
+    }
+}
+
+/* Xperia L */
+@media screen and (device-width: 480px) and (device-height: 854px) and (orientation: portrait){
+    .yanbalCountry{
+        margin-top: 35px;
+    }
+}
+
+/* Pocket neo */
+@media (max-device-width: 320px) and (orientation: portrait) {
+    .img-placeholder {
+        margin-left: 15%;
+        width: 70%;
+        padding-bottom: 89%;
+        position: relative;
+    }
+    .yanbalCountry{
+        margin-top: 35px;
+    }
+    .yanbal-title-item .yanbal-item-text.yanbal-item-text-sincro {
+        width: 65%;
+    }
+}

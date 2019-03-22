@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{ tituloMensaje }}</h3>
+</div>
+<div class="modal-body yanbal-coleccion-menu">
+
+	<div class="row">
+		<h4 class="col-xs-24">
+			{{ mensaje }}
+		</h4>
+	</div>
+	<div class="contenido-scroll" ng-if="lista">
+		<div class="row" >
+	    	<h4 class="col-xs-24 margin-top-0 margin-bottom-0" ng-repeat="item in lista">
+	    		{{ ' - ' + item }}
+	    	</h4>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+    <button class="yanbal-button" ng-click="closeModal()">{{ botonMensaje }}</button>
+</div>

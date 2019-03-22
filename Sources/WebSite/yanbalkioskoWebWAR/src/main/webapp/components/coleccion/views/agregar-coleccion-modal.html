@@ -1,0 +1,64 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{modalTitulo}}</h3>
+</div>
+<div class="modal-body">
+    <div class="row margin-top-20">
+        <div class="col-xs-6">
+            Nombre
+        </div>
+        <div class="col-xs-18">
+            <input type="text" class="yanbal-input-archivo" ng-model="coleccionDatos.nombre" validar-alfanumerico ng-disabled="disableControls" maxlength=50 />
+        </div>
+    </div>
+    <div class="row margin-top-20">
+        <div class="col-xs-6">
+            Nro. Orden
+        </div>
+        <div class="col-xs-18">
+            <select id="ordenDropdown" class="demo-default hide-country" ng-model="coleccionDatos.orden" ng-disabled="disableControls" selectize-dropdown>
+                <option value="">Seleccione nro de orden</option>
+       			<option ng-repeat="orden in nroOrden" value="{{$index + 1}}">Nro de Orden {{ $index + 1}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row margin-top-20">
+        <div class="col-xs-6">
+            Colecci&oacute;n padre
+        </div>
+        <div class="col-xs-18">
+            <input type="text" class="yanbal-input-archivo" ng-model="coleccionDatos.nombre_coleccion_padre" disabled/>            
+        </div>
+    </div>
+    <div class="row margin-top-20">
+        <div class="col-xs-6">
+            Nivel
+        </div>
+        <div class="col-xs-18">
+            <input type="text" class="yanbal-input-archivo" ng-model="coleccionDatos.nivel" disabled/>
+        </div>
+    </div>
+    <div class="row margin-top-20">
+        <div class="col-xs-6">
+            Colecci&oacute;n
+        </div>
+        <div class="col-xs-18">
+            <select id="colorDropdown" class="demo-default dropdown-coleccion" ng-model="coleccionDatos.color" ng-disabled="disableColor" selectize-dropdown-color>
+		        <option value="">Seleccione color</option>
+                <option ng-repeat="color in colores" data-data="{{ { 'colores': color.hexa }  }}" value="{{ color.hexa }}">{{ color.texto }}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row margin-top-20">
+        <div class="col-xs-24 text-area-container">
+            <div class="yanbal-text-area">
+                <span>Descripci&oacute;n</span>
+                <textarea ng-model="coleccionDatos.descripcion" validar-alfanumerico ng-disabled="disableControls" maxlength=100></textarea>
+		   </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button ng-if="!disableControls" class="yanbal-button" ng-click="ok()" >Guardar</button>
+    <button ng-if="!disableControls" class="yanbal-button-cancel" ng-click="cancel()">Cancelar</button>
+    <button ng-if="disableControls" class="yanbal-button" ng-click="cancel()">Cerrar</button>
+</div>

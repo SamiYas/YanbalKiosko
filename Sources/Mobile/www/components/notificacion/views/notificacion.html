@@ -1,0 +1,12 @@
+<ion-view view-title="{{ notificationTitle }}">
+    <ion-content>
+        <ion-list>
+            <ion-item class="item yanbal-title-item" ng-click="openModal(item)" ng-repeat="item in items" ng-if="item.PUBLICADO">
+                <i class="yanbal-nuevo" translate>COLECCIONNUEVO</i>
+                <p class="yanbal-item-text yanbal-item-text-detail">{{item.NOMBRE}}</p>
+                <i class="icon" ng-class="{ 'icon-yanbal-star': item.DESTACADO }"></i>
+                <i class="icon icon-yanbal-menu yanbal-menu-notificacion"></i>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

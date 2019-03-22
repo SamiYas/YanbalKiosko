@@ -1,0 +1,34 @@
+<ion-view view-title="{{ parentTitle }}">
+    <ion-content>
+        <ion-refresher ng-if="activeRefresh" pulling-icon="ion-refresher-yanbal" on-refresh="doRefresh()" on-pulling="closeLoading()" spinner="none">
+        </ion-refresher>
+        <loading-directive></loading-directive>
+        <ion-list>
+            <ion-item ng-hide="shownItems > 0" class="item-stable no-items">
+                <p class="yanbal-title-text" translate>SINCONTENIDO</p>
+            </ion-item>
+            <div ng-repeat="coleccion in colecciones" class="yanbal-full-width">
+                <ion-item ng-if="coleccion.items.length > 0 && coleccion.HIJOS > 0" class="item-stable" ng-style="{'border-left-color' : coleccion.COLOR}"
+                          ng-click="toggleGroup(coleccion)"
+                          ng-class="{active: coleccion.mostrarColeccion}">
+                    <i class="icon" ng-class="isGroupShown(coleccion) ? 'ion-coleccion-principal' : 'ion-coleccion-principal-active'"></i>
+                    <a id="{{coleccion.CORRELATIVO_COLECCION}}" class="yanbal-title-text">{{coleccion.NOMBRE}}</a>
+                    <i class="icon yanbal-coleccion-right"></i>
+                </ion-item>
+                <ion-item ng-if="item.COLECCION && item.HIJOS > 0 || (!item.COLECCION && item.PUBLICADO)" class="item-accordion"
+                          ng-repeat="item in coleccion.items"
+                          ng-click="item.COLECCION ? openColeccion(item.CORRELATIVO_COLECCION, item.NOMBRE) : openModal(item)"
+                          ng-show="coleccion.mostrarColeccion"
+                          ng-class="{'yanbal-position-nuevo': item.NUEVO, 'item-active': isItemActive(item), 'item-descargando': item.DESCARGANDO == 1}" custom-width-directive>
+                    <i class="yanbal-item-icon" ng-class="item.COLECCION ? 'folder' : item.DESTACADO ? item.EXTENSION + '-active' : item.EXTENSION"></i>
+                    <p class="yanbal-item-text" ng-class="{'yanbal-text-destacado': item.DESTACADO && !item.COLECCION, 'allow-long-text': item.COLECCION}">{{item.NOMBRE}}</p>
+                    <i class="icon" ng-class="{'icon-yanbal-star': item.DESTACADO, 'hide': item.COLECCION}"></i>
+                    <i class="icon" ng-class="{'yanbal-nuevo icon-yanbal-nuevo': item.NUEVO, 'hide': item.COLECCION || !item.NUEVO}" translate>COLECCIONNUEVO</i>
+                    <i class="icon" ng-class="{'icon-yanbal-menu-active': item.NUEVO, 'icon-yanbal-menu': !item.NUEVO, 'hide': item.COLECCION }"></i>
+                    <i class="icon yanbal-coleccion-right" ng-class="{'hide': !item.COLECCION}"></i>
+                    <i ng-if="item.DESCARGANDO == 1" class="yanbal-item-icon descargando"></i>
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

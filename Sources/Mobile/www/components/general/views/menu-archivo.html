@@ -1,0 +1,21 @@
+<ion-modal-view class="yanbalContext">
+	<ion-content scroll="false" class="yanbalMenu yanbal-modal">
+        <div class="img-placeholder">
+            <img class="imgPreview" ng-src="{{ activeItem.RUTA_IMGPREVIA }}" alt="preview" />
+        </div>
+		<ion-list>
+            <ion-item class="border-top-none" ng-class="{ 'yanbal-item-disabled' : activeItem.DESCARGANDO == 1 }" ng-click="activeItem.DESCARGANDO == 1 || GetArchivo(activeItem)">
+                <span translate>ARCHIVOABRIR</span>
+                <i class="icon yanbalIcon yanbalRight yanbalOpen"></i>
+            </ion-item>
+            <ion-item ng-class="{ 'yanbal-item-disabled' : activeItem.ARCHIVO_DESCARGADO || activeItem.DESCARGABLE == 0 || activeItem.DESCARGANDO == 1 }" ng-click="(activeItem.ARCHIVO_DESCARGADO || activeItem.DESCARGABLE == 0 || activeItem.DESCARGANDO == 1) || GuardarLocalmente(activeItem)">
+                <span translate>ARCHIVOGUARDAR</span>({{ activeItem.TAMANO_ARCHIVO.toFixed(1) }} Mb)
+                <i class="icon yanbalIcon yanbalRight yanbalDownload"></i>
+            </ion-item>
+            <ion-item class="hideBorderBottom" ng-class="{ 'yanbal-item-disabled' : !activeItem.ARCHIVO_DESCARGADO }" ng-click="!activeItem.ARCHIVO_DESCARGADO || DeleteArchivo(activeItem)">
+                <span translate>ARCHIVOELIMINAR</span>
+                <i class="icon yanbalIcon yanbalRight yanbalDelete"></i>
+            </ion-item>
+		</ion-list>
+	</ion-content>
+</ion-modal-view>

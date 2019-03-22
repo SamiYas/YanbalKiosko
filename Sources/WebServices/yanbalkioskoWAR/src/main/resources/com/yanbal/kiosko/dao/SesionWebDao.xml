@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanbal.kiosko.dao.SesionWebDao">
+    <!-- <cache /> -->  
+    <insert id="insertar" parameterType="com.yanbal.kiosko.entities.SesionWeb" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_SESION_WEB_INS(#{correlativoPais,javaType=Long,jdbcType=BIGINT,mode=IN},
+										    #{nombreUsuario,javaType=String,jdbcType=VARCHAR,mode=IN},
+										    #{clave,javaType=String,jdbcType=VARCHAR,mode=IN},
+										    #{token,javaType=String,jdbcType=VARCHAR,mode=IN},
+										    #{correlativoRol,javaType=Long,jdbcType=BIGINT,mode=IN})}
+    </insert>
+    <delete id="eliminarPorToken" parameterType="map" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_SESION_WEB_DEL(#{token,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </delete>
+	<select id="obtenerPorToken" parameterType="map" resultType="com.yanbal.kiosko.entities.SesionWeb" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_SESION_WEB_SEL_POR_TOKEN(#{token,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    <delete id="eliminarSesionesExpiradas" parameterType="map" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_ELIMINAR_SESIONES_EXPIRADAS_POR_USR(#{nombreUsuario,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </delete>    
+    <delete id="eliminarSiTokenHaExpirado" parameterType="map" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_ELIMINAR_SESION_WEB_SI_ES_EXPIRADA(#{token,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </delete>
+</mapper>

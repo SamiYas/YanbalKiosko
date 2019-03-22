@@ -1,0 +1,130 @@
+<div class="modal-header">
+    <h3 class="modal-title padding-left-15">{{modalTitulo}}</h3>
+</div>
+<form id="formRest" method="POST" enctype="multipart/form-data" action="http://201.234.55.22:9082/YanbalKioskoServices/web/insertarArchivo"  accept-charset="utf-8" >
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-6">
+            Colecci&oacute;n
+        </div>
+        <div class="col-xs-18 container-border">
+            <input type="text" class="yanbal-input-archivo" ng-disabled="disableControls || modoVisualizacionArchivo == 1" ng-model="nombreColeccion" />
+            <div class="fake-border"></div>
+        </div>
+    </div>
+    <div class="row margin-top-20">
+        <div class="col-xs-6">
+            Archivo
+        </div>
+        <div class="col-xs-17 yanbal-carga-coleccion">
+            <input type="file" id ="archivoLoad" name="archivo" accept=".jpg, .pdf, .mp3, .mp4" required ng-disabled="modoVisualizacionArchivo == 3" >
+            <div class="yanbal-file">
+                <input type="text" class="yanbal-input-archivo" id="pathFileSelected" placeholder="{{ modoVisualizacionArchivo == 1 ? 'Seleccione archivo' : '' }}" ng-disabled="modoVisualizacionArchivo == 3" />
+            </div>
+            <i ng-show="myForm.file.$error.required">*required</i>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            Nombre
+        </div>
+        <div class="col-xs-10" >
+            <input type="text" id="nombreArchivo" class="yanbal-input-archivo" ng-model="infoArchivo.nombre" validar-alfanumerico ng-disabled="modoVisualizacionArchivo == 3" maxlength="50" />
+        </div>
+        <div class="col-xs-3 yanbal-extension" >
+            <input type="text" class="yanbal-input-archivo" ng-model="infoArchivo.extension" ng-disabled="disableControls || modoVisualizacionArchivo == 1" />
+        </div>
+        <div class="col-xs-3 yanbal-peso-archivo">
+            <input type="text" class="yanbal-input-archivo" ng-model="infoArchivo.tamanho" ng-disabled="disableControls || modoVisualizacionArchivo == 1" />
+        </div>
+        <div class="col-xs-1 yanbal-unidad-medida">
+            MB
+        </div>
+    </div>
+    <div class="row margin-top-20">
+        <div class="col-xs-6">
+            <a ng-click="modoVisualizacionArchivo == 3 || checkDescargable()" class="yanbal-checkbox-archivo" ng-model="infoArchivo.descargable" ng-class="{'active': infoArchivo.descargable}" >Descargable</a>
+        </div>
+        <div class="col-xs-6">
+            <a ng-click="modoVisualizacionArchivo == 3 || checkDestacado()" class="yanbal-checkbox-archivo" ng-model="infoArchivo.destacado" ng-class="{'active': infoArchivo.destacado}" >Destacado</a>
+        </div>
+        <div class="col-xs-4 padding-right-0">
+            <span>Nro. Orden</span>
+        </div>
+        <div class="col-xs-8">
+            <select id="ordenArchivoDropdown" class="demo-default dropdown-coleccion" ng-disabled="modoVisualizacionArchivo == 3" placeholder="Seleccione nro de orden" ng-model="infoArchivo.nro_orden" selectize-dropdown>
+                <option value="">Seleccione nro de orden</option>
+                <option ng-repeat="orden in nroOrdenArchivo" value="{{orden.numero}}">{{orden.descripcion}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row margin-top-20">
+        <div class="col-xs-24 text-area-container">
+            <div class="yanbal-text-area">
+                <span>Descripci&oacute;n</span>
+                <textarea ng-disabled="modoVisualizacionArchivo == 3" ng-model="infoArchivo.descripcion" validar-alfanumerico maxlength="200" ></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row margin-top-20">
+        <div class="col-xs-16 yanbal-descripcion-previa">
+            <span>Vista Previa</span>
+            <input type="file" id="imagenLoad" name="vistaPrevia" accept=".jpg" required ng-disabled="modoVisualizacionArchivo == 3" >
+            <div class="yanbal-file">
+                <input type="text" class="yanbal-input-archivo" id="pathImageSelected" placeholder="{{ modoVisualizacionArchivo == 1 ? 'Seleccione imagen' : '' }}" ng-disabled="modoVisualizacionArchivo == 3" />
+            </div>
+            <i ng-show="myForm.file.$error.required">*required</i>
+            <span class="leyenda">{{ leyendaVistaPrevia }}</span>
+        </div>
+        <div class="col-xs-8">
+            <img id="vistaPrevia" ng-src="{{ infoArchivo.ruta_imgprevia }}" class="yanbal-vista-previa" />
+        </div>
+    </div>
+    <div class="row margin-top-20">
+        <div class="col-xs-24">
+            Roles
+        </div>
+        <div ng-repeat="item in roles" class="col-xs-6 yanbal-rol" >
+            <a ng-click="modoVisualizacionArchivo == 3 || check(item)" class="yanbal-checkbox-archivo" ng-class="{'active': item.value}" >{{item.text}}</a>
+        </div>
+    </div>
+    <div class="row margin-top-20 yanbal-date-container">
+        <div class="col-xs-5 padding-left-15">
+            <span>Fecha Inicio</span>
+        </div>
+        <div class="col-xs-7 padding-right-15">
+            <p class="input-group">
+                <input type="text" class="datepicker-text" datepicker-popup="{{format}}" is-open="openedInicio" datepicker-options="dateOptions" ng-disabled="true" ng-model="infoArchivo.fec_inicio" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar" />
+                <span class="input-group-btn">
+                    <button type="button" class="datepicker-btn" ng-click="open($event,'0')" ng-disabled="modoVisualizacionArchivo == 3" ><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+        </div>
+        <div class="col-xs-5">
+            <span>Fecha Caducidad</span>
+        </div>
+        <div class="col-xs-7 padding-right-15">
+            <p class="input-group">
+                <input type="text" class="datepicker-text" datepicker-popup="{{format}}" is-open="openedCaducidad" datepicker-options="dateOptions" ng-disabled="true" ng-model="infoArchivo.fec_caducidad" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar" />
+                <span class="input-group-btn">
+                    <button type="button" class="datepicker-btn" ng-click="open($event,'1')" ng-disabled="modoVisualizacionArchivo == 3" ><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="row margin-top-10 yanbal-estado-archivo-container">
+        <div class="col-xs-5 padding-left-15">
+            <span>Estado</span>
+        </div>
+        <div class="col-xs-7 padding-right-15">
+            <input type="text" class="yanbal-input-archivo" disabled ng-model="infoArchivo.estado" />
+        </div>
+    </div>
+</div>
+<input type="hidden" name="json"><br />
+</form>
+<div class="modal-footer">
+    <button ng-if="modoVisualizacionArchivo != 3" class="yanbal-button" ng-click="ok()">Guardar</button>
+    <button ng-if="modoVisualizacionArchivo != 3" class="yanbal-button-cancel" ng-click="cancel()">Cancelar</button>
+    <button ng-if="modoVisualizacionArchivo == 3" class="yanbal-button" ng-click="cancel()">Cerrar</button>
+</div>

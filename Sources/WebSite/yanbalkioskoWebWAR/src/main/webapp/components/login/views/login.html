@@ -1,0 +1,32 @@
+<form>
+<div class="row first-row margin-top-0">
+    <div class="row">
+        <div class="yanbal-logo"><img src="../../img/isotipo-naranja-120x120.png" alt="logo yanbal" /></div>
+    </div>
+    <div class="row row-login text-center margin-top-40">
+        <label class="yanbal-icon yanbal-icon-usuario">
+            <input class="yanbal-input-login" type="text" placeholder="Usuario" fake-text-input/>
+            <input class="yanbal-input-login real-input" type="text" ng-model="data.username" validar-username maxlength=30/>
+            <div class="fake-border"></div>
+        </label>
+    </div>
+    <div class="row row-login yanbal-icon-password text-center">
+        <label class="yanbal-icon yanbal-icon-password">
+        	<input class="yanbal-input-login" type="text" placeholder="Contrase&ntilde;a" fake-text-input/>
+            <input class="yanbal-input-login real-input" type="password" ng-model="data.password" validar-password maxlength=30/>
+            <div class="fake-border"></div>
+        </label>
+    </div>
+    <div class="row row-login yanbal-dropdown">
+        <select class="demo-default" placeholder="Pa&iacute;s"  ng-model="data.country" selectize-dropdown-pais>
+			<option value="" >Pa&iacute;s</option>
+    		<option ng-repeat="pais in paises" value="{{pais}}">
+      			{{pais.nombre}}
+    		</option> 
+        </select>
+        <div class="fake-border"></div>
+    </div>
+    <div class="row row-login yanbal-icon-password text-center margin-top-40">
+        <input type="submit" value="Ingresar" class="yanbal-button" ng-click="login()" />
+    </div>
+</div>

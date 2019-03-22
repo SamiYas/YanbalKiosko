@@ -1,0 +1,48 @@
+	
+	estructuraDatos {
+		token: "dsfwefeD#R#VT#T", //Token de autenticación de usuario, provisto por el servidor.
+		umbrales{ //En megabytes.
+			pdf: "3",
+			jpg: "3",
+			mp3: "3",
+			mp4: "2.8"
+		}
+		colecciones{
+			coleccion1{
+				Archivo1{
+					nombreArchivo: "Nombre del archivo",
+					url: "https:\\yambal.com/archivo1.pdf",
+					urlPreview: "https:\\yambal.com/archivo1Preview.jpg",
+					destacado: true,
+					nuevo: true,
+					descargable: true,
+					orden: 1,
+					archivoDescargado: "dwe213423sddff.pdf",
+					tamanoArchivo: "0.89",//en megabytes
+				}
+			},
+			coleccion2{
+				coleccion5{
+					Archivo2{
+						nombreArchivo: "Nombre del archivo 2",
+						url: https:\\yambal.com/archivo1.pdf,
+						urlPreview: "",
+						destacado: true,
+						nuevo: true,
+						descargable: true,
+						orden: 1,
+						archivoDescargado: "",
+						tamanoArchivo: "1.09",//en megabytes
+					}
+				}
+			},
+			coleccion3{
+			},
+			coleccion4{
+			}
+		}
+	}
+
+	
+	
+	

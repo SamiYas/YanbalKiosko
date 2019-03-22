@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <!-- Carga en clases todos los archivos de configuracion descritos -->
+<init-modules>
+   <init-module>
+      <init-class>com.yanbal.kiosko.common.config.loader.WebsphereVariableLoader</init-class>
+      <config-file></config-file>
+   </init-module>
+   <init-module>
+      <init-class>com.yanbal.kiosko.common.config.loader.ApplicationConfigLoader</init-class>
+      <config-file>WEB-INF\config\application-properties\application-properties-config.xml</config-file>
+   </init-module>
+</init-modules>

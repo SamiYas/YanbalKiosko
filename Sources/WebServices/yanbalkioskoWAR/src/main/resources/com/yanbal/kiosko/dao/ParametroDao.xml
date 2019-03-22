@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanbal.kiosko.dao.ParametroDao">
+    <!-- <cache /> --> 
+    <select id="obtenerPorNombre" parameterType="map" resultType="com.yanbal.kiosko.entities.Parametro" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_PARAMETRO_SEL_NOMBRE_PARAMETRO(#{nombre,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    <update id="modificarPorNombre" parameterType="com.yanbal.kiosko.entities.Parametro" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_PARAMETRO_UPD(#{correlativoParametro,javaType=Long,jdbcType=BIGINT,mode=IN},
+									 	   #{valor,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </update>
+</mapper>

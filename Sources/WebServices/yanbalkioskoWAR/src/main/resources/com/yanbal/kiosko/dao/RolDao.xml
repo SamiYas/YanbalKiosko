@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanbal.kiosko.dao.RolDao">
+    <!-- <cache /> -->  
+    <select id="listarTodo" resultType="com.yanbal.kiosko.entities.Rol" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_ROL_SEL_TODOS()}
+    </select>
+    <select id="obtenerPorCodigo" parameterType="map" resultType="com.yanbal.kiosko.entities.Rol" statementType="CALLABLE">
+    	{CALL KSK_KIOSKO.USP_ROL_SEL_POR_CODIGO(#{codigoRol,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </select>
+    
+    <select id="obtenerRol" parameterType="map" resultType="Long" statementType="CALLABLE">
+    	select KSK_KIOSKO.FN_SEL_ROL(#{correlativo, mode=IN, jdbcType=BIGINT},
+    								#{tabla, mode=IN, jdbcType=BIGINT})
+    			FROM SYSIBM.SYSDUMMY1
+    </select>
+</mapper>

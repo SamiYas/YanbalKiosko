@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanbal.kiosko.dao.ColeccionDao">
+    <!-- <cache /> -->
+    <select id="obtenerColeccionArchivo" parameterType="map" resultType="hashmap" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_COLECCIONARCHIVO_POR_PAISROLFECSINC(#{pais, mode=IN, jdbcType=VARCHAR},
+															     #{codigoRol, mode=IN, jdbcType=VARCHAR},
+															     #{fechaSincronizacion, mode=IN, javaType=Date,jdbcType=TIMESTAMP}
+															    )}
+    </select>     
+    <select id="listarColecciones" parameterType="map" resultType="com.yanbal.kiosko.entities.Coleccion" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_COLECCION_SEL_POR_COLECCIONPADRE(#{correlativoColeccionPadre, mode=IN, jdbcType=BIGINT},
+															  #{correlativoPais, mode=IN, jdbcType=BIGINT})}
+    </select>
+    <select id="insertar" parameterType="com.yanbal.kiosko.entities.Coleccion" resultType="java.lang.Long" statementType="CALLABLE">
+    	{CALL KSK_KIOSKO.USP_COLECCION_INS(#{correlativoColeccionPadre,javaType=Long,jdbcType=BIGINT,mode=IN},
+    									   #{correlativoPais,javaType=Long,jdbcType=BIGINT,mode=IN},
+    									   #{correlativoRol,javaType=Long,jdbcType=BIGINT,mode=IN},
+    									   #{nombre,javaType=String,jdbcType=LONGVARCHAR,mode=IN},
+    									   #{nivel,javaType=Integer,jdbcType=INTEGER,mode=IN},
+    									   #{nroOrden,javaType=Integer,jdbcType=INTEGER,mode=IN},
+										   #{descripcion,javaType=String,jdbcType=LONGVARCHAR,mode=IN},
+										   #{color,javaType=String,jdbcType=VARCHAR,mode=IN},
+										   #{usuarioRegistra,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </select>
+	<select id="obtenerPorCorrelativo" parameterType="map" resultType="com.yanbal.kiosko.entities.Coleccion" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_COLECCION_SEL_PK(#{correlativoColeccion, mode=IN, jdbcType=BIGINT})}
+    </select>
+    <select id="modificar" parameterType="com.yanbal.kiosko.entities.Coleccion" resultType="java.lang.Long" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_COLECCION_UPD(#{correlativoColeccion, mode=IN, jdbcType=BIGINT},
+										  #{correlativoColeccionPadre, mode=IN, jdbcType=BIGINT},
+										  #{correlativoRol, mode=IN, jdbcType=BIGINT},
+										  #{nombre,javaType=String,jdbcType=LONGVARCHAR,mode=IN},
+										  #{nivel,javaType=Integer,jdbcType=INTEGER,mode=IN},
+										  #{nroOrden,javaType=Integer,jdbcType=INTEGER,mode=IN},
+										  #{descripcion,javaType=String,jdbcType=LONGVARCHAR,mode=IN},
+										  #{color,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{usuarioModifica,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </select>    
+	<select id="obtenerRutaOrigen" parameterType="map" resultType="com.yanbal.kiosko.entities.Coleccion" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_RUTA_SEL_POR_CORRELCOLECCION(#{correlativoColeccion, mode=IN, jdbcType=BIGINT})}
+    </select>  
+	<select id="eliminar" parameterType="map" resultType="java.lang.Long" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_COLECCION_DEL(#{correlativoColeccion, mode=IN, jdbcType=BIGINT},
+										   #{usuarioModifica,javaType=String,jdbcType=VARCHAR,mode=IN})}
+    </select>        
+    <select id="obtenerPorNotificar" parameterType="map" resultType="int" statementType="CALLABLE">
+    	{CALL KSK_KIOSKO.USP_OBTENER_POR_NOTIFICAR(#{correlativoPais, mode=IN, jdbcType=BIGINT})}
+    </select>
+</mapper>

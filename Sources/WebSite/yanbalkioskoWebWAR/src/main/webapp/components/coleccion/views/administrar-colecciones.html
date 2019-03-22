@@ -1,0 +1,99 @@
+<div class="row margin-top-65" >
+	<div class="col-xs-8 col-xs-offset-1 col-sm-8 col-sm-offset-1">
+		<input type="text" placeholder="Notificaci&oacute;n de nuevos cat&aacute;logos" class="notification-input" fake-text-input />
+		<input type="text" id="notificationInputReal" class="notification-input real-input" validar-texto-notificacion placeholder-input ng-model="mensajeNotificacion" maxlength="80" />
+	</div>
+	<div class="col-xs-3 col-md-3">
+		<input id="btnNotificar" type="submit" value="Notificar" class="yanbal-button full-width" disabled ng-click="enviarNotificacion(mensajeNotificacion)"/>
+		<div ng-if="notificationAmount > 0" class="notification-circle">!</div>
+	</div>
+</div>
+<div class="row margin-top-30">
+	<div class="col-xs-8 col-xs-offset-1 col-sm-8 col-sm-offset-1">
+		<div class="row yanbal-coleccion-menu">			
+			<tabset class="top-menu">
+				<tab heading="Colecciones" ng-click="cargarTab(1)">
+					<div class="row margin-top-20">
+						<div class="col-xs-24">
+							<a class=></a>
+							<a href="#" ng-click="!shownColeccion || verificarColeccionEliminable(400)" ng-class="{ 'disabled' : !shownColeccion }" class="yanbal-option delete pull-right margin-right-0" title="Eliminar"></a>
+							<a href="#" ng-click="!shownColeccion || verColeccion()" ng-class="{ 'disabled' : !shownColeccion }" class="yanbal-option search pull-right" title="Ver"></a>
+							<a href="#" ng-click="!shownColeccion || editarColeccion()" ng-class="{ 'disabled' : !shownColeccion }" class="yanbal-option edit pull-right" title="Editar"></a>
+                            <a href="#" ng-click="breadcrumb.length <= 0 || crearColeccion()" ng-class="{ 'disabled' : breadcrumb.length <= 0 }" class="yanbal-option add pull-right" title="Nuevo"></a>
+						</div>
+					</div>
+					<div class="row margin-top-20">
+						<div class="col-xs-24 yanbal-breadcrumb">
+							<span ng-repeat="item in breadcrumb">
+								<a ng-click="openColeccion(item)" ng-class="{'active': item.active}" >{{item.nombre}}</a>
+								<i ng-class="{'separator': !$last}" ></i>
+							</span>
+						</div>
+					</div>
+					<div class="row margin-coleccion-menu">
+						<div class="col-xs-24">
+							<ul class="list-group">
+							  <li class="list-group-item white-space-pre" ng-dblclick="openColeccion(contenido)" sglclick="toggleColeccion(contenido)" ng-class="{'active': isColeccionShown(contenido)}" ng-repeat="contenido in coleccion">{{contenido.orden + '- ' + contenido.nombre}}<i ng-class="{'visualizar': tieneSubColecciones(contenido)}"></i></li>							  
+							</ul>
+						</div>				
+					</div>
+				</tab>
+				<tab heading="Buscar archivos" ng-click="cargarTab(2)">
+					<div class="row margin-top-40">
+						<div class="col-xs-8">
+							<span class="yanbal-search-text">Nombre</span>
+						</div>
+						<div class="col-xs-16">
+							<input id="filtrosArchivoNombre" type="text" class="yanbal-search-input" ng-model="filtrosArchivo.nombre" validar-texto-buscar-archivos maxlength="50" />
+						</div>
+					</div>
+					<div class="row margin-top-40">
+						<div class="col-xs-8">
+							<span class="yanbal-search-text">Descripci&oacute;n</span>
+						</div>
+						<div class="col-xs-16">
+							<input id="filtrosArchivoDescripcion" type="text" class="yanbal-search-input" ng-model="filtrosArchivo.descripcion" validar-texto-buscar-archivos maxlength="200" />
+						</div>
+					</div>
+					<div class="row margin-top-80">						
+						<div class="col-xs-10 col-xs-offset-9">
+							<input id="btnBuscarArchivos" type="submit" class="yanbal-button-buscar" value="Buscar" ng-click="buscarArchivos()" disabled />
+						</div>
+					</div>
+				</tab>
+			</tabset>
+		</div>
+	</div>
+	<div class="col-xs-14 col-sm-14">
+		<div class="row yanbal-archivo-menu">
+			<div class="row top-menu">
+				<div class="col-xs-10 col-sm-10">
+					<span class="yanbal-title">Listado de archivos</span>
+				</div>
+			</div>
+			<div class="row margin-top-20 top-menu">
+				<div class="col-xs-24">
+					<a class="yanbal-checkbox pull-left" ng-click="gridOptions.data.length <= 0 || seleccionarTodos()" ng-class="{'active': checkboxModel.seleccionarTodos}">Seleccionar todos</a>
+					<a href="#" ng-click="disableArchivoOptions || moveArchivo(800)" ng-class="{ 'disabled' : disableArchivoOptions }" class="yanbal-option move pull-right margin-right-0" title="Mover"></a>
+					<a href="#" ng-click="!enableDeleteOption || eliminarArchivo()" class="yanbal-option delete pull-right"  ng-class="{ 'disabled' : !enableDeleteOption }" title="Eliminar"></a>
+					<a href="#" ng-click="disableArchivoOptions || verArchivo()" ng-class="{ 'disabled' : disableArchivoOptions }" class="yanbal-option search pull-right" title="Ver"></a>
+					<a href="#" ng-click="disableArchivoOptions || editarArchivo()" ng-class="{ 'disabled' : disableArchivoOptions }" class="yanbal-option edit pull-right" title="Editar"></a>
+					<a href="#" ng-click="esBusquedaArchivos || !shownColeccion || nuevoArchivo()" ng-class="{ 'disabled' : esBusquedaArchivos || !shownColeccion }" class="yanbal-option add pull-right" title="Nuevo"></a>
+				</div>
+			</div>
+			<div class="row yanbal-grid-container margin-top-20">
+				<div class="col-xs-24 padding-0">
+					<div ui-grid="gridOptions" ui-grid-selection class="yanbal-grid"></div>
+				</div>
+				<div class="sin-resultados" ng-if="sinResultados">
+					No se encontraron archivos.
+				</div>
+			</div>
+			<div class="row yanbal-grid-container margin-top-20 padding-top-1">
+				<div class="col-xs-24 yanbal-grid-leyenda">
+					Roles: - D: Directora - C: Consultora - E: Estrella - S: Staff - A: Aspirante
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

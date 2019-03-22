@@ -1,0 +1,19 @@
+<div ng-controller="navController">
+    <div class="yanbal-header" ng-if="location.path() !== '/login'">
+        <img class="yanbal-header-logo" src="../../img/isotipo-blanco-120x120.png" alt="yanbal logo" />
+        <a class="yanbal-cerrar-sesion" ng-click="cerrarSesion()" href="#">Cerrar sesi&oacute;n</a>
+    </div>
+    <ul class="nav nav-pills yanbal-nav" ng-if="location.path() !== '/login'">
+        <li ng-repeat="item in navOptions" class="yanbal-item" ng-class="{'active' : isNavSelected(item)}" ><a class="{{item.class}}" ui-sref="{{item.sref}}" ng-click="selectNav(item)"><span>{{item.text}}</span></a></li>
+    </ul>
+    <div class="btn-group yanbal-pais-dropdown" dropdown is-open="status.isopen" ng-if="location.path() !== '/login'">
+        <button id="btnPais" type="button" class="btn pais-dropdown-button dropdown-toggle" dropdown-toggle ng-disabled="habilitarBoton()" >
+            <span class="pais"></span>
+            <span class="text">{{paisSeleccionado.nombre}}</span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li ng-repeat ="pais in paisesNav" ng-click="selectPais(pais)"><a href>{{pais.nombre}}</a></li>            
+        </ul>
+    </div>
+</div>

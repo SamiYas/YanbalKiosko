@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanbal.kiosko.dao.BitacoraDao">
+    <!-- <cache /> -->
+    <insert id="insertar" parameterType="com.yanbal.kiosko.entities.Bitacora" statementType="CALLABLE">
+		{CALL KSK_KIOSKO.USP_BITACORA_INS(#{descripcion,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{accion,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{nombreArchivo,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{tamanhoArchivo,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{tipoArchivo,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{tipoDescarga,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{usuario,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{plataforma,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{dispositivoIdentificador,javaType=String,jdbcType=VARCHAR,mode=IN},
+										  #{fecha,javaType=Date,jdbcType=TIMESTAMP,mode=IN})}
+    </insert>
+</mapper>
+

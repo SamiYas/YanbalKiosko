@@ -1,0 +1,19 @@
+<!--
+Cada tab hijo <ion-nav-view> tendra su propio historial de 
+navegacion para cambiar sus vistas hacia adelante o atras.
+-->
+<ion-tabs class="tabs-icon-only tabs-striped tabs-top tabs-color-active-positive">
+    <!-- Tab colecciones -->
+    <ion-tab title="Colecciones" icon-off="ion-ios-coleccion" icon-on="ion-ios-coleccion-active" href="#/tab/coleccion">
+        <ion-nav-view name="tab-coleccion"></ion-nav-view>
+    </ion-tab>
+    <!-- Tab notificaciones-->
+    <ion-tab title="Notificaciones" icon-off="ion-ios-notif {{notificationClass}}" icon-on="ion-ios-notif-active {{notificationClass}}" href="#/tab/notificacion">
+        <ion-nav-view name="tab-notificacion"></ion-nav-view>
+    </ion-tab>
+    <!-- Tab configuracion-->
+    <ion-tab title="Configuracion" icon-off="ion-ios-config" icon-on="ion-ios-config-active" href="#/tab/configuracion">
+        <ion-nav-view name="tab-configuracion"></ion-nav-view>
+    </ion-tab>
+
+</ion-tabs>
